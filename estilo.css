@@ -1,10 +1,18 @@
 #jogo{
-    width: 700px;
+    width: 500px;
     height: 400px;
     margin: auto;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 50px;
+}
+#forca{
+    margin: auto;
+    width: 300px;
+    height: 270px;
 }
 #resultado{
-    font-size: 45pt;
+    font-size: 40pt;
+}
+#win{
+    margin-top: 40px;
 }

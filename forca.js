@@ -2,7 +2,11 @@ var gerador = 10*Math.random();
 var str;
 var blankspace = [];
 var cont;
+var cont2 = 0;
 var resultado = document.getElementById('res');
+var dv = document.getElementById('forca');//pega a div que vai mostrar a imagem da forca
+var img; //Variável para carregar imagens
+var win = document.getElementById('win'); //Pega a div onde será exibida a mensagem de vitória ou derrota
 
 //Teste incial de um gerador de palavras. Depois, provavelmente, será trocado por um gerador melhor. Por hora contém apenas 2 palavras
 if(gerador < 5)
@@ -48,8 +52,15 @@ function tentativa(){
     uma outra variável auxiliar (guardapos) para guardar a posição. */
     pos = substr.indexOf(letra);
 
-    if(pos == -1)
-            alert("Letra não encontrada");
+    if(pos == -1){
+        img=new Image();
+        img.src="forca"+cont2+".png";
+        dv.style.backgroundImage = "url("+img.src+")";
+        cont2++;
+        if(cont2 >= 7){ //Se cont chegar em 7 o jogador perdeu o jogo
+            win.innerHTML = "Você perdeu! Tente novamente."
+        }
+    }
     else{
         resultado.innerHTML = '';
         pos = 0;
@@ -71,6 +82,15 @@ function tentativa(){
     for(cont = 0; cont < tam; cont++){
         resultado.innerHTML += ' ' + blankspace[cont] + ' ';
     }
+
+}
+let ganhou = document.getElementById('resultado').innerHTML;
+if(ganhou.indexOf('_') == -1){
+    win.innerHTML = "Parabéns! Você venceu."
 }
 
+}
+
+function muda(){//Da reload na página para trocar de palavra
+    window.location.reload();
 }
