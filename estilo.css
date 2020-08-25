@@ -1,0 +1,10 @@
+#jogo{
+    width: 700px;
+    height: 400px;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+#resultado{
+    font-size: 45pt;
+}

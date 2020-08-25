@@ -69,7 +69,7 @@ function tentativa(){
     como acontece num jogo da forca no papel mesmo. */
     }
     for(cont = 0; cont < tam; cont++){
-        resultado.innerHTML += blankspace[cont];
+        resultado.innerHTML += ' ' + blankspace[cont] + ' ';
     }
 }
 
