@@ -1,18 +1,22 @@
-var gerador = 10*Math.random();
-var str;
+var biblioteca = ['cachorro', 'alçapão', 'árvore', 'computador', 'helicoptero', 'estrela', 'celular',
+'violão', 'parede', 'goleiro', 'futebol', 'amário', 'escrivaninha', 'carregador', 'régua', 'caminhão',
+'bicicleta', 'formigueiro', 'beliche']; //Variável que armazena uma biblioteca de palavras
+var gerador = Math.round(biblioteca.length*Math.random()); //Sorteia um número o que, no fim das contas, sorteia uma palavra
+if(gerador >= biblioteca.length){/*É possível que ele sorteio um número x, quando na verdade o último indice
+    do array biblioteca é x-1. Nesse caso, pra não dar erro, sorteamos novamento o número com o while abaixo. */
+    while(gerador >= biblioteca.length){
+        var gerador = Math.round(biblioteca.length*Math.random())
+    }
+}
+    
+var str = biblioteca[gerador]; //Armazena a palavra sorteada
 var blankspace = [];
 var cont;
-var cont2 = 0;
+var cont2 = 1;
 var resultado = document.getElementById('res');
 var dv = document.getElementById('forca');//pega a div que vai mostrar a imagem da forca
 var img; //Variável para carregar imagens
 var win = document.getElementById('win'); //Pega a div onde será exibida a mensagem de vitória ou derrota
-
-//Teste incial de um gerador de palavras. Depois, provavelmente, será trocado por um gerador melhor. Por hora contém apenas 2 palavras
-if(gerador < 5)
-    str="cachorro";
-else
-    str="alçapão";
 
 var tam = str.length; //Serve para pegar o tamanho da string
 
@@ -20,6 +24,11 @@ for(cont = 0; cont < tam; cont++){ //Gera um array cheio de ' _ ' para mostrar q
     blankspace[cont] = ' _ ';
     resultado.innerHTML += blankspace[cont];
 }
+
+img=new Image();
+img.src="forca0.png";
+dv.style.backgroundImage = "url("+img.src+")";
+
 
 /*A função abaixo serve para verificar se a letra inserida está presente na palavra. Também serve para ir 'revelando' as letra ao jogador, conforme
 ele vai acertando. Resumidamente, todas as vezes que o jogador tentar inserir uma letra, todo o processo será executado por essa função*/
@@ -40,6 +49,8 @@ function tentativa(){
     let guardapos = 0; //Essa variável será útil para armazenar a posição na hora de usar substring para guardar a posição de uma letra na palavra
     cont = 0; //contador
 
+    document.getElementById('letras').innerHTML += letra + ' ';
+
     /*  A partir daqui funciona assim: faz-se uma verificação pela primeira vez para ver se há ocorrência da letra na palavra. Caso não haja, ele
     informa que não há e espera outra letra e, caso haja, entra no else abaixo.
         Se entrou no else, então é porque há ocorrência da letra na palavra. Nesse caso, 'zeramos' o conteúdo da variável resultado (responsável
@@ -58,7 +69,7 @@ function tentativa(){
         dv.style.backgroundImage = "url("+img.src+")";
         cont2++;
         if(cont2 >= 7){ //Se cont chegar em 7 o jogador perdeu o jogo
-            win.innerHTML = "Você perdeu! Tente novamente."
+            win.innerHTML = "Você perdeu! A palavra era "+ str + "<br> Tente novamente."
         }
     }
     else{
@@ -88,7 +99,7 @@ let ganhou = document.getElementById('resultado').innerHTML;
 if(ganhou.indexOf('_') == -1){
     win.innerHTML = "Parabéns! Você venceu."
 }
-
+document.getElementById('letra').value = '';
 }
 
 function muda(){//Da reload na página para trocar de palavra
